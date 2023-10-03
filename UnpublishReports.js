@@ -1,12 +1,12 @@
-var gr = new GlideRecord('sys_report');
-gr.addQuery('is_published=true^ORroles=public');
-gr.query();
-while(gr.next()) {
+var pubReport = new GlideRecord('sys_report');
+pubReport.addQuery('is_published=true^ORroles=public');
+pubReport.query();
+while(pubReport.next()) {
     //Obtain current roles report is shared with
-	var removePublic = gr.roles;
+	var removePublic = pubReport.roles;
     //Remove public role from string
 	removePublic = removePublic.replace(/public/g, '');
     //Set report roles to new string value. Wihtout public role, report will auto unpublish
-	gr.roles.setValue(removePublic);
-	gr.update();
+	pubReport.roles.setValue(removePublic);
+	pubReport.update();
 }
